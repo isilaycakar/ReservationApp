@@ -37,7 +37,6 @@ namespace ReservationApp.BusinessLayer.Concrete
         {
             subAboutDal.Update(t);
         }
-    }
-    {
+   
     }
 }

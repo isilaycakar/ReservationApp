@@ -8,5 +8,6 @@ namespace ReservationApp.Panel.UI.Controllers
         {
             return View();
         }
+
     }
 }

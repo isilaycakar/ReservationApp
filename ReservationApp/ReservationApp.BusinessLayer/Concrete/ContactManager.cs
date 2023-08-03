@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ReservationApp.BusinessLayer.Concrete
 {
-    public class ContactManager: IContactService
+    public class ContactManager : IContactService
     {
         IContactDal contactDal;
 
@@ -42,6 +42,6 @@ namespace ReservationApp.BusinessLayer.Concrete
         {
             contactDal.Update(t);
         }
+
     }
-}
 }

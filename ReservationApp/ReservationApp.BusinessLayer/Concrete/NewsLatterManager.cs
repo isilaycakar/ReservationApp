@@ -37,7 +37,6 @@ namespace ReservationApp.BusinessLayer.Concrete
         {
             newsLatterDal.Update(t);
         }
-    }
-    {
+    
     }
 }

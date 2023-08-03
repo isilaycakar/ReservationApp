@@ -38,6 +38,4 @@ namespace ReservationApp.BusinessLayer.Concrete
             testimonialDal.Update(t);
         }
     }
-    {
-    }
 }

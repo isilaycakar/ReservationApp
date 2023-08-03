@@ -42,7 +42,6 @@ namespace ReservationApp.BusinessLayer.Concrete
         {
             featureDal.Update(t);
         }
-    }
-    {
+    
     }
 }
