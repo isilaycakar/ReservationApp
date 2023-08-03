@@ -20,12 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Entity Framework\" />
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ReservationApp.EntityLayer\ReservationApp.EntityLayer.csproj" />
   </ItemGroup>
 
