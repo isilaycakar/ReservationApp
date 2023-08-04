@@ -1,0 +1,74 @@
+﻿@using ReservationApp.EntityLayer.Concrete
+@model List<Feature>
+
+<div class="best-rooms py-5">
+    <div class="container py-md-5">
+        <div class="ban-content-inf row">
+            @{
+                var firstItem = Model.FirstOrDefault();
+            }
+
+            @if (firstItem != null)
+            {
+                <div class="maghny-gd-1 col-lg-6">
+                    <div class="maghny-grid">
+                        <figure class="effect-lily border-radius  m-0">
+                            <img class="img-fluid" src="~/Traversal-Starter/assets/images/@firstItem.Image" alt="" />
+                            <figcaption>
+                                <div>
+                                    <h4>@firstItem.Title</h4>
+                                    <p>From @firstItem.Description</p>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>No data available.</p>
+            }
+
+            <div class="maghny-gd-1 col-lg-6 mt-lg-0 mt-4">
+                <div class="row">
+                    @foreach (var item in Model.Skip(1).Take(2))
+                    {
+                        <div class="maghny-gd-1 col-6">
+                            <div class="maghny-grid">
+                                <figure class="effect-lily border-radius">
+                                    <img class="img-fluid" src="~/Traversal-Starter/assets/images/@item.Image" alt="" />
+                                    <figcaption>
+                                        <div>
+                                            <h4>@item.Title</h4>
+                                            <p>@item.Description </p>
+                                        </div>
+
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    }
+                    @foreach (var item in Model.Skip(3).Take(2))
+                    {
+                        <div class="maghny-gd-1 col-6 mt-4">
+                            <div class="maghny-grid">
+                                <figure class="effect-lily border-radius">
+                                    <img class="img-fluid" src="~/Traversal-Starter/assets/images/@item.Image" alt="" />
+                                    <figcaption>
+                                        <div>
+                                            <h4>@item.Title</h4>
+                                            <p>@item.Description </p>
+                                        </div>
+
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    }
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
