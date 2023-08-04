@@ -2,6 +2,7 @@
 using ReservationApp.BusinessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Entity_Framework;
+using ReservationApp.EntityLayer.Concrete;
 
 namespace ReservationApp.Panel.UI.Controllers
 {
@@ -13,6 +14,17 @@ namespace ReservationApp.Panel.UI.Controllers
         {
             var values = c.Destinations.ToList();
             return View(values);
+        }
+
+        public IActionResult DestinationDetails(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DestinationDetails(Destination p)
+        {
+            return View();
         }
     }
 }

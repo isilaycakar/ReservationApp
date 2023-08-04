@@ -24,7 +24,7 @@
     <section class="grids-1 py-5">
         <div class="grids py-lg-5 py-md-4">
             <div class="container">
-                <h3 class="hny-title mb-5">Destinations</h3>
+                <h3 class="hny-title mb-5">Popüler Rotalar</h3>
                 <div class="row">
                     @foreach (var item in Model)
                     {
@@ -35,7 +35,7 @@
                                     <h4><a href="blog-single.html">@item.City</a></h4>
                                     <p>@item.PeriodOfStay </p>
                                     <div class="dst-btm">
-                                        <h6 class="">Erken Rezervasyon Fiyatları: </h6>
+                                        <h6 class="">Erken Rezervasyon Fırsatları </h6>
                                         <span>$@item.Price</span>
                                     </div>
                                 </div>
@@ -46,6 +46,7 @@
             </div>
         </div>
     </section>
-   
+    <link rel="stylesheet" href="~/Traversal-Liberty/assets/css/style-liberty.css"/>
+    <script src="~/traversal-liberty/assets/js/bootstrap.min.js"></script>
     
 </body>
