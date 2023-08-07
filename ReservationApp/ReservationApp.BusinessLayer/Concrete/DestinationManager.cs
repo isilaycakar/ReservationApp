@@ -35,7 +35,7 @@ namespace ReservationApp.BusinessLayer.Concrete
 
         public Destination TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return destinationDal.GetByID(id);
         }
 
         public void TUpdate(Destination t)
