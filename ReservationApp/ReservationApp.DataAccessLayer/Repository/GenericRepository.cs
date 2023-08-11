@@ -15,6 +15,7 @@ namespace ReservationApp.DataAccessLayer.Repository
         public void Create(T t)
         {
             c.Add(t);
+            c.SaveChanges();
         }
 
         public void Delete(T t)

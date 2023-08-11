@@ -19,7 +19,7 @@ namespace ReservationApp.BusinessLayer.Concrete
 
         public void TAdd(Comment t)
         {
-            throw new NotImplementedException();
+            commentDal.Create(t);
         }
 
         public void TDelete(Comment t)
