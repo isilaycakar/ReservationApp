@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.EntityLayer.Concrete;
+using ReservationApp.Panel.UI.Models;
 
 namespace ReservationApp.Panel.UI
 {
@@ -14,7 +15,7 @@ namespace ReservationApp.Panel.UI
 
             // Add services to the container.
             builder.Services.AddDbContext<Context>();
-            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
+            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>();
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddMvc(config =>
@@ -56,7 +57,15 @@ namespace ReservationApp.Panel.UI
                 name: "default",
                 pattern: "{controller=Default}/{action=Index}/{id?}");
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
             app.Run();
+
         }
     }
 }

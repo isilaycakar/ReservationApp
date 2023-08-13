@@ -29,4 +29,9 @@
     <ProjectReference Include="..\ReservationApp.EntityLayer\ReservationApp.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Member\Data\" />
+    <Folder Include="Areas\Member\Models\" />
+  </ItemGroup>
+
 </Project>
