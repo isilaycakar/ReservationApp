@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ReservationApp.BusinessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Entity_Framework;
@@ -6,6 +7,7 @@ using ReservationApp.EntityLayer.Concrete;
 
 namespace ReservationApp.Panel.UI.Controllers
 {
+    [AllowAnonymous]
     public class DestinationController : Controller
     {
         DestinationManager dm = new DestinationManager(new EFDestinationDal());
