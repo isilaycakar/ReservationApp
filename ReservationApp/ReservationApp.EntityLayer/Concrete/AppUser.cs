@@ -11,5 +11,6 @@ namespace ReservationApp.EntityLayer.Concrete
     {
         public string? ImageUrl { get; set; }
         public string NameSurname { get; set; }
+        public List<Reservation> Reservation { get; set; }
     }
 }
