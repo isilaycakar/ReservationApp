@@ -1,15 +1,15 @@
 ﻿@model List<Reservation>
 
 @{
-    ViewData["Title"] = "MyCurrentReservation";
+    ViewData["Title"] = "MyApprovalReservation";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h1>Aktif Rezervasyonlarım</h1>
+<h1>Onay Bekleyen Rezervasyonlar</h1>
 
 @if (Model.Count == 0)
 {
-    <h3>Aktif rezervasyonunuz bulunmamaktadır.</h3>
+    <h3>onay bekleyen rezervasyonunuz bulunmamaktadır.</h3>
 }
 else
 {

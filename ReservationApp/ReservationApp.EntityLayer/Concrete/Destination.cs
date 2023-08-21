@@ -23,5 +23,6 @@ namespace ReservationApp.EntityLayer.Concrete
         public string DetailUp { get; set; }
         public string DetailsDown { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Reservation> Reservations { get; set; }
     }
 }

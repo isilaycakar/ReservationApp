@@ -1,8 +1,36 @@
-﻿
+﻿@model List<Reservation>
+
 @{
     ViewData["Title"] = "MyOldReservation";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 <h1>Geçmiş Rezervasyonlarım</h1>
+<br />
 
+@if (Model.Count == 0)
+{
+    <h3>Geçmiş rezervasyonunuz bulunmamaktadır.</h3>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th></th>
+            <th>Lokasyon</th>
+            <th>Kişi Sayısı</th>
+            <th>Rezervasyon</th>
+            <th>Durum</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ReservationId</td>
+                <td>@item.Destination.City</td>
+                <td>@item.PersonCount</td>
+                <td>@item.ReservationDate.ToString("dd/MM/yyyy")</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+    </table>
+}

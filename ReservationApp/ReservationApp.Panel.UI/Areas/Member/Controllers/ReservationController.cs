@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ReservationApp.BusinessLayer.Concrete;
+using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Entity_Framework;
 using ReservationApp.EntityLayer.Concrete;
 
@@ -20,13 +21,24 @@ namespace ReservationApp.Panel.UI.Areas.Member.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult MyCurrentReservation() 
+        public async Task<IActionResult> MyCurrentReservation() 
         {
-            return View(); 
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var valuesList = reservationManager.GetListWithReservationByAccepted(user.Id);
+            return View(valuesList);
         }
-        public IActionResult MyOldReservation()
+        public async Task<IActionResult> MyOldReservation()
         {
-            return View();
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var valuesList = reservationManager.GetListWithReservationByPrevious(user.Id);
+            return View(valuesList);
+        }
+        public async Task<IActionResult> MyApprovalReservation()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var valuesList = reservationManager.GetListWithReservationByWaitApproval(user.Id);
+            return View(valuesList);
+
         }
 
         public IActionResult NewReservation()
