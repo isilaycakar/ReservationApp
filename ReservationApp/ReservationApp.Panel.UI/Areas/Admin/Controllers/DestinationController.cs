@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReservationApp.BusinessLayer.Concrete;
+using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Entity_Framework;
 using ReservationApp.EntityLayer.Concrete;
 
@@ -31,7 +32,7 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
         {
             var values = destinationManager.TGetByID(Id);
             destinationManager.TDelete(values);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Destination", new { area = "Admin" });
         }
         public IActionResult UpdateDestination(int Id)
         {

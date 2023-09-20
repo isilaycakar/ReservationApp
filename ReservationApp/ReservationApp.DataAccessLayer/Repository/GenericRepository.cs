@@ -21,6 +21,7 @@ namespace ReservationApp.DataAccessLayer.Repository
         public void Delete(T t)
         {
             c.Remove(t);
+            c.SaveChanges();
         }
 
         public List<T> GetAll()
@@ -42,6 +43,7 @@ namespace ReservationApp.DataAccessLayer.Repository
         public void Update(T t)
         {
             c.Update(t);
+            c.SaveChanges();
         }
     }
 }

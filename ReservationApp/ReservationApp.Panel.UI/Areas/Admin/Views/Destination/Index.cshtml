@@ -16,7 +16,6 @@
         <th>Sitede Gör</th>
         <th>Sil</th>
         <th>Güncelle</th>
-        <th>Detaylar</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -25,11 +24,11 @@
             <td>@item.City</td>
             <td>@item.Price $</td>
             <td>@item.Capacity</td>
-            <td><a href="#" class="btn btn-outline-info">Sitede Gör</a></td>
-            <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
-            <td><a href="#" class="btn btn-outline-success">Güncelle</a></td>
-            <td><a href="#" class="btn btn-outline-primary">Detaylar</a></td>
-            
+            <td><a href="/Destination/DestinationDetails/@item.DestinationID" class="btn btn-outline-info">Sitede Gör</a></td>
+
+            <td><a asp-area="Admin" asp-controller="Destination" asp-action="DeleteDestination" asp-route-id="@item.DestinationID" class="btn btn-outline-danger" onclick="return confirm('[@item.City] isimli rotayı silmek istediğinize emin misiniz?');">Sil</a></td>
+
+            <td><a asp-area="Admin" asp-controller="Destination" asp-action="UpdateDestination" asp-route-id="@item.DestinationID" class="btn btn-outline-success">Güncelle</a></td>
         </tr>
     }
 </table>
