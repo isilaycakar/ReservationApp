@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using ReservationApp.BusinessLayer.Abstract;
+using ReservationApp.BusinessLayer.Concrete;
+using ReservationApp.DataAccessLayer.Abstract;
 using ReservationApp.DataAccessLayer.Concrete;
+using ReservationApp.DataAccessLayer.Entity_Framework;
 using ReservationApp.EntityLayer.Concrete;
 using ReservationApp.Panel.UI.Models;
 
@@ -16,6 +20,15 @@ namespace ReservationApp.Panel.UI
             // Add services to the container.
             builder.Services.AddDbContext<Context>();
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>();
+
+            // EF baðýmlýlýðýný kaldýrmak için yazýldý. Ef newlemesi yapmadan readonly ile service constructor yapýlýyor.
+            builder.Services.AddScoped<ICommentService, CommentManager>();
+            builder.Services.AddScoped<ICommentDal, EFCommentDal>();
+            builder.Services.AddScoped<IDestinationService, DestinationManager>();
+            builder.Services.AddScoped<IDestinationDal, EFDestinationDal>();
+            builder.Services.AddScoped<IAppUserService, AppUserManager>();
+            builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
+            //-------------------------------------------------------------------------------------
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddMvc(config =>

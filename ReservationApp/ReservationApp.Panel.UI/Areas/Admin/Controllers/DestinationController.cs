@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ReservationApp.BusinessLayer.Abstract;
 using ReservationApp.BusinessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Entity_Framework;
@@ -10,11 +11,16 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
     [Route("Admin/[controller]/[action]")]
     public class DestinationController : Controller
     {
-        DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
+        private readonly IDestinationService destinationService;
+
+        public DestinationController(IDestinationService destinationService)
+        {
+            this.destinationService = destinationService;
+        }
 
         public IActionResult Index()
         {
-            var values = destinationManager.TGetAll();
+            var values = destinationService.TGetAll();
             return View(values);
         }
         public IActionResult AddDestination()
@@ -24,25 +30,25 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddDestination(Destination destination)
         {
-            destinationManager.TAdd(destination);
+            destinationService.TAdd(destination);
             return RedirectToAction("Index", "Destination", new { area = "Admin" });
 
         }
         public IActionResult DeleteDestination(int Id)
         {
-            var values = destinationManager.TGetByID(Id);
-            destinationManager.TDelete(values);
+            var values = destinationService.TGetByID(Id);
+            destinationService.TDelete(values);
             return RedirectToAction("Index", "Destination", new { area = "Admin" });
         }
         public IActionResult UpdateDestination(int Id)
         {
-            var values = destinationManager.TGetByID(Id);
+            var values = destinationService.TGetByID(Id);
             return View(values);
         }
         [HttpPost]
         public IActionResult UpdateDestination(Destination destination)
         {
-            destinationManager.TUpdate(destination);
+            destinationService.TUpdate(destination);
             return RedirectToAction("Index");
         }
     }

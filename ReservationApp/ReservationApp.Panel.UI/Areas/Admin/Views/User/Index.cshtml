@@ -1,0 +1,42 @@
+﻿@model List<AppUser>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int sayac = 0;
+}
+
+<h1>Kullanıcı Listesi</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Ad Soyad</th>
+        <th>Kullanıcı Adı</th>
+        <th>Mail Adresi</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+        <th>Yorumlar</th>
+        <th>Tur Geçmişi</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @* @{
+                sayac = sayac + 1;
+            }
+            <td>@sayac</td> *@
+            <td>@item.Id</td>
+            <td>@item.NameSurname</td>
+            <td>@item.UserName</td>
+            <td>@item.Email</td>
+            <td><a asp-area="Admin" asp-controller="User" asp-action="DeleteUser" asp-route-id="@item.Id" class="btn btn-outline-danger" onclick="return confirm('[@item.NameSurname] isimli kişiyi silmek istediğinize emin misiniz?');">Sil</a></td>
+            <td><a asp-area="Admin" asp-controller="User" asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-outline-warning">Düzenle</a></td>
+            <td><a asp-area="Admin" asp-controller="User" asp-action="CommentUser" asp-route-id="@item.Id" class="btn btn-outline-primary">Yorumlar</a></td>
+            <td><a asp-area="Admin" asp-controller="User" asp-action="DestinationUser" asp-route-id="@item.Id" class="btn btn-outline-success">Tur Geçmişi</a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Admin/User/AddUser" class="btn btn-outline-info">Yeni Kullanıcı Kaydı</a>

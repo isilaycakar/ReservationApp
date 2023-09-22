@@ -1,5 +1,6 @@
 ﻿using ReservationApp.BusinessLayer.Abstract;
 using ReservationApp.DataAccessLayer.Abstract;
+using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace ReservationApp.BusinessLayer.Concrete
     public class CommentManager : ICommentService
     {
         ICommentDal commentDal;
+        Context context = new Context();
         public CommentManager(ICommentDal commentDal)
         {
             this.commentDal = commentDal;
@@ -20,16 +22,18 @@ namespace ReservationApp.BusinessLayer.Concrete
         public void TAdd(Comment t)
         {
             commentDal.Create(t);
+            context.SaveChanges();
         }
 
         public void TDelete(Comment t)
         {
-            throw new NotImplementedException();
+            commentDal.Delete(t);
+            context.SaveChanges();
         }
 
         public List<Comment> TGetAll()
         {
-            throw new NotImplementedException();
+            return commentDal.GetAll();
         }
         public List<Comment> TGetDestinationById(int Id)
         {
@@ -37,12 +41,18 @@ namespace ReservationApp.BusinessLayer.Concrete
         }
         public Comment TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return commentDal.GetByID(id);
         }
 
         public void TUpdate(Comment t)
         {
-            throw new NotImplementedException();
+            commentDal.Update(t);
+            context.SaveChanges();
+        }
+
+        public List<Comment> TGetListCommentWithDestination()
+        {
+            return commentDal.GetListCommetWithDestination();
         }
     }
 }
