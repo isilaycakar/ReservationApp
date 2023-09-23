@@ -34,9 +34,9 @@
             <td><a asp-area="Admin" asp-controller="User" asp-action="DeleteUser" asp-route-id="@item.Id" class="btn btn-outline-danger" onclick="return confirm('[@item.NameSurname] isimli kişiyi silmek istediğinize emin misiniz?');">Sil</a></td>
             <td><a asp-area="Admin" asp-controller="User" asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-outline-warning">Düzenle</a></td>
             <td><a asp-area="Admin" asp-controller="User" asp-action="CommentUser" asp-route-id="@item.Id" class="btn btn-outline-primary">Yorumlar</a></td>
-            <td><a asp-area="Admin" asp-controller="User" asp-action="DestinationUser" asp-route-id="@item.Id" class="btn btn-outline-success">Tur Geçmişi</a></td>
+            <td><a asp-area="Admin" asp-controller="User" asp-action="ReservationUser" asp-route-id="@item.Id" class="btn btn-outline-success">Tur Geçmişi</a></td>
         </tr>
     }
 </table>
 
-<a href="/Admin/User/AddUser" class="btn btn-outline-info">Yeni Kullanıcı Kaydı</a>
+<a href="/Login/SignUp/" class="btn btn-outline-info">Yeni Kullanıcı Kaydı</a>

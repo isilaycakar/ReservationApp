@@ -10,10 +10,12 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly IAppUserService appUserService;
+        private readonly IReservationService reservationService;
 
-        public UserController(IAppUserService appUserService)
+        public UserController(IAppUserService appUserService, IReservationService reservationService)
         {
             this.appUserService = appUserService;
+            this.reservationService = reservationService;
         }
 
         public IActionResult Index()
@@ -48,10 +50,10 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult DestinationUser(int id)
+        public IActionResult ReservationUser(int id)
         {
-            appUserService.TGetAll();
-            return View();
+            var values = reservationService.GetListWithReservationByAccepted(id);
+            return View(values);
         }
     }
 }

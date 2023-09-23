@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using ReservationApp.BusinessLayer.Abstract;
 using ReservationApp.BusinessLayer.Concrete;
+using ReservationApp.BusinessLayer.Container;
 using ReservationApp.DataAccessLayer.Abstract;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Entity_Framework;
@@ -22,12 +23,9 @@ namespace ReservationApp.Panel.UI
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>();
 
             // EF baðýmlýlýðýný kaldýrmak için yazýldý. Ef newlemesi yapmadan readonly ile service constructor yapýlýyor.
-            builder.Services.AddScoped<ICommentService, CommentManager>();
-            builder.Services.AddScoped<ICommentDal, EFCommentDal>();
-            builder.Services.AddScoped<IDestinationService, DestinationManager>();
-            builder.Services.AddScoped<IDestinationDal, EFDestinationDal>();
-            builder.Services.AddScoped<IAppUserService, AppUserManager>();
-            builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
+
+            builder.Services.ContainerDependencies();
+
             //-------------------------------------------------------------------------------------
             builder.Services.AddControllersWithViews();
 
@@ -77,13 +75,7 @@ namespace ReservationApp.Panel.UI
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
             });
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
-            });
+           
             app.Run();
 
         }
