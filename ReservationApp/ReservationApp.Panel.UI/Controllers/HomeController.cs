@@ -15,13 +15,17 @@ namespace ReservationApp.Panel.UI.Controllers
 
         public IActionResult Index()
         {
+            DateTime d = Convert.ToDateTime(DateTime.Now.ToLongDateString());
+            _logger.LogInformation(d + "Index sayfası çağırıldı");
             return View();
         }
 
         public IActionResult Privacy()
         {
+            _logger.LogInformation("Privacy sayfası çağırıldı");
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

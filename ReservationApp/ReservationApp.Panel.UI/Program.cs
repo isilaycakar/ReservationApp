@@ -18,6 +18,12 @@ namespace ReservationApp.Panel.UI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Logging.ClearProviders();
+            builder.Logging.SetMinimumLevel(LogLevel.Debug);
+            builder.Logging.AddDebug();
+            var path = Directory.GetCurrentDirectory();
+            builder.Logging.AddFile($"{path}\\Logs\\Log1.txt");
+
             // Add services to the container.
             builder.Services.AddDbContext<Context>();
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>();
@@ -76,7 +82,7 @@ namespace ReservationApp.Panel.UI
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
             });
-           
+
             app.Run();
 
         }
