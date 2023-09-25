@@ -6,6 +6,7 @@ using ReservationApp.EntityLayer.Concrete;
 namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]")]
     public class GuideController : Controller
     {
         private readonly IGuideService guideService;
@@ -31,7 +32,7 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
         public IActionResult AddGuide(Guide guide)
         {
             guideService.TAdd(guide);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Guide", new { area = "Admin" });
 
         }
 
