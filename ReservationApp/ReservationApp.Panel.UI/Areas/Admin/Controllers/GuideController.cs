@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using ReservationApp.BusinessLayer.Abstract;
+using ReservationApp.BusinessLayer.ValidationRules;
 using ReservationApp.EntityLayer.Concrete;
+using System.ComponentModel.DataAnnotations;
 
 namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("Admin/[controller]/[action]")]
+    [Route("Admin/Guide/[action]")]
     public class GuideController : Controller
     {
         private readonly IGuideService guideService;
@@ -31,8 +34,21 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddGuide(Guide guide)
         {
-            guideService.TAdd(guide);
-            return RedirectToAction("Index", "Guide", new { area = "Admin" });
+            GuideValidator validationRules = new GuideValidator();
+            FluentValidation.Results.ValidationResult result = validationRules.Validate(guide);
+            if (result.IsValid)
+            {
+                guideService.TAdd(guide);
+                return RedirectToAction("Index", "Guide", new { area = "Admin" });
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
 
         }
 
@@ -51,7 +67,7 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
 
         }
 
-        public IActionResult ChangeToTrue(int id    ) 
+        public IActionResult ChangeToTrue(int id)
         {
             return RedirectToAction("Index");
 
