@@ -28,7 +28,7 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
         {
             var values = appUserService.TGetByID(id);
             appUserService.TDelete(values);
-            return View("Index");
+            return RedirectToAction("Index", "User", new { area = "Admin" });
         }
 
         public IActionResult EditUser(int id)
