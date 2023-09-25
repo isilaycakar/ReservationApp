@@ -1,25 +1,22 @@
 ﻿using ClosedXML.Excel;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.Panel.UI.Models;
 
-namespace ReservationApp.Panel.UI.Controllers
+namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
 {
-    [AllowAnonymous]
+    [Area("Admin")]
     public class ExcelController : Controller
     {
-        
         public IActionResult Index()
         {
             return View();
         }
-
         public List<DestinationModel> DestinationList()
         {
             List<DestinationModel> destinationModel = new List<DestinationModel>();
-            using(var c = new Context())
+            using (var c = new Context())
             {
                 destinationModel = c.Destinations.Select(x => new DestinationModel
                 {
@@ -54,7 +51,7 @@ namespace ReservationApp.Panel.UI.Controllers
         }
         public IActionResult DestinationExcelReport()
         {
-            using(var workbook = new XLWorkbook())
+            using (var workbook = new XLWorkbook())
             {
                 var workSheet = workbook.Worksheets.Add("Tur Listesi");
                 workSheet.Cell(1, 1).Value = "Şehir";
@@ -63,7 +60,7 @@ namespace ReservationApp.Panel.UI.Controllers
                 workSheet.Cell(1, 4).Value = "Kapasite";
 
                 int rowCount = 2;
-                foreach (var item in DestinationList()) 
+                foreach (var item in DestinationList())
                 {
                     workSheet.Cell(rowCount, 1).Value = item.City;
                     workSheet.Cell(rowCount, 2).Value = item.PeriodOfStay;
@@ -72,7 +69,7 @@ namespace ReservationApp.Panel.UI.Controllers
                     rowCount++;
                 }
 
-                using(var stream = new MemoryStream())
+                using (var stream = new MemoryStream())
                 {
                     workbook.SaveAs(stream);
                     var content = stream.ToArray();
