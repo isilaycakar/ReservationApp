@@ -1,6 +1,7 @@
 ﻿using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using ReservationApp.BusinessLayer.Abstract;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.Panel.UI.Models;
 
@@ -9,6 +10,13 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
     [Area("Admin")]
     public class ExcelController : Controller
     {
+        private readonly IExcelService excelService;
+
+        public ExcelController(IExcelService excelService)
+        {
+            this.excelService = excelService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -31,23 +39,7 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
 
         public IActionResult StaticExcelReport()
         {
-            ExcelPackage excel = new ExcelPackage();
-            var workSheet = excel.Workbook.Worksheets.Add("Sayfa1");
-            workSheet.Cells[1, 1].Value = "Rota";
-            workSheet.Cells[1, 2].Value = "Rehber";
-            workSheet.Cells[1, 3].Value = "Kontenjan";
-
-            workSheet.Cells[2, 1].Value = "Jülyen Alpleri";
-            workSheet.Cells[2, 2].Value = "Natalia Martinez";
-            workSheet.Cells[2, 3].Value = "30";
-
-            workSheet.Cells[3, 1].Value = "Paris";
-            workSheet.Cells[3, 2].Value = "Işıl Çevik";
-            workSheet.Cells[3, 3].Value = "30";
-
-            var bytes = excel.GetAsByteArray();
-
-            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadshtml.sheet", "dosya1.xlsx");
+            return File(excelService.ExcelList(DestinationList()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "YeniExcel.xlsx");
         }
         public IActionResult DestinationExcelReport()
         {

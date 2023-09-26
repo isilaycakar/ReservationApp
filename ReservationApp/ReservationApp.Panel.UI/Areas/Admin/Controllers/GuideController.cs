@@ -69,13 +69,15 @@ namespace ReservationApp.Panel.UI.Areas.Admin.Controllers
 
         public IActionResult ChangeToTrue(int id)
         {
-            return RedirectToAction("Index");
+            guideService.TChangeToTrueByGuide(id);
+            return RedirectToAction("Index", "Guide", new { area = "Admin" });
 
         }
 
         public IActionResult ChangeToFalse(int id)
         {
-            return RedirectToAction("Index");
+            guideService.TChangeToFalseByGuide(id);
+            return RedirectToAction("Index", "Guide", new { area = "Admin" });
 
         }
     }

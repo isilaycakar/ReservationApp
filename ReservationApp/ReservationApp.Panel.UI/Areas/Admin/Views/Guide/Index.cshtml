@@ -32,13 +32,13 @@
             <td>@item.Description</td>
             @if (item.Status == true)
             {
-                <td><a href="#" class="btn btn-outline-warning">Pasif Yap</a></td>
+                <td><a asp-area="Admin" asp-controller="Guide" asp-action="ChangeToFalse" asp-route-id="@item.GuideID" class="btn btn-outline-warning">Pasif Yap</a></td>
             }
             else
             {
-                <td><a href="#" class="btn btn-outline-success">Aktif Yap</a></td>
+                <td><a asp-area="Admin" asp-controller="Guide" asp-action="ChangeToTrue" asp-route-id="@item.GuideID" class="btn btn-outline-success">Aktif Yap</a></td>
             }
-            <td><a href="#" class="btn btn-outline-info">Düzenle</a></td>
+            <td><a asp-area="Admin" asp-controller="Guide" asp-action="EditGuide" asp-route-id="@item.GuideID" class="btn btn-outline-info">Düzenle</a></td>
         </tr>
     }
 </table>

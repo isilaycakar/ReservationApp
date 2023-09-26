@@ -18,6 +18,16 @@ namespace ReservationApp.BusinessLayer.Concrete
             guideDal.Create(t);
         }
 
+        public void TChangeToFalseByGuide(int id)
+        {
+            guideDal.ChangeToFalseByGuide(id);
+        }
+
+        public void TChangeToTrueByGuide(int id)
+        {
+            guideDal.ChangeToTrueByGuide(id);
+        }
+
         public void TDelete(Guide t)
         {
             guideDal.Delete(t);
@@ -30,7 +40,7 @@ namespace ReservationApp.BusinessLayer.Concrete
 
         public Guide TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return guideDal.GetByID(id);
         }
 
         public void TUpdate(Guide t)
