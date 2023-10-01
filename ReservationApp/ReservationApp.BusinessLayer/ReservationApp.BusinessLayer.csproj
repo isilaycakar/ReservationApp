@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DTOLayer\DTOLayer.csproj" />
     <ProjectReference Include="..\ReservationApp.DataAccessLayer\ReservationApp.DataAccessLayer.csproj" />
     <ProjectReference Include="..\ReservationApp.EntityLayer\ReservationApp.EntityLayer.csproj" />
   </ItemGroup>
