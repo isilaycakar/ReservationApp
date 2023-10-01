@@ -32,6 +32,9 @@ namespace ReservationApp.BusinessLayer.Container
 
             services.AddScoped<IExcelService, ExcelManager>();
             services.AddScoped<IPDFService, PDFManager>();
+
+            services.AddScoped<IContactUsService, ContactUsManager>();
+            services.AddScoped<IContactUsDal, EFContactUsDal>();
         }
     }
 }
