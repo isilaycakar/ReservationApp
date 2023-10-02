@@ -1,9 +1,13 @@
+using DTOLayer.DTOs.AnnouncementDTOs;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using ReservationApp.BusinessLayer.Abstract;
 using ReservationApp.BusinessLayer.Concrete;
 using ReservationApp.BusinessLayer.Container;
+using ReservationApp.BusinessLayer.ValidationRules;
 using ReservationApp.DataAccessLayer.Abstract;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Entity_Framework;
@@ -28,12 +32,14 @@ namespace ReservationApp.Panel.UI
             builder.Services.AddDbContext<Context>();
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>();
 
-            // EF baðýmlýlýðýný kaldýrmak için yazýldý. Ef newlemesi yapmadan readonly ile service constructor yapýlýyor.
-
+            
             builder.Services.ContainerDependencies();
 
+            builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.CustomerValidator();
+
             //-------------------------------------------------------------------------------------
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddFluentValidation();
 
             builder.Services.AddMvc(config =>
             {

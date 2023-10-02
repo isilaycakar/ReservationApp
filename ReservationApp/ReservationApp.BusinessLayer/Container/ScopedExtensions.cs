@@ -1,6 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DTOLayer.DTOs.AnnouncementDTOs;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using ReservationApp.BusinessLayer.Abstract;
 using ReservationApp.BusinessLayer.Concrete;
+using ReservationApp.BusinessLayer.ValidationRules;
+using ReservationApp.BusinessLayer.ValidationRules.AnnouncementValidationRules;
 using ReservationApp.DataAccessLayer.Abstract;
 using ReservationApp.DataAccessLayer.Entity_Framework;
 using System;
@@ -35,6 +39,15 @@ namespace ReservationApp.BusinessLayer.Container
 
             services.AddScoped<IContactUsService, ContactUsManager>();
             services.AddScoped<IContactUsDal, EFContactUsDal>();
+
+            services.AddScoped<IAnnouncementService, AnnouncementManager>();
+            services.AddScoped<IAnnouncementDal, EFAnnouncementDal>();
+        }
+
+        public static void CustomerValidator(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<AnnouncementAddDTO>, AnnouncementValidator>();
+            services.AddTransient<IValidator<AnnouncementUpdateDTO>, AnnouncementUpdateValidator>();
         }
     }
 }
