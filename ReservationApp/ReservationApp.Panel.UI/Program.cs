@@ -32,7 +32,8 @@ namespace ReservationApp.Panel.UI
             builder.Services.AddDbContext<Context>();
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>();
 
-            
+            builder.Services.AddHttpClient();
+
             builder.Services.ContainerDependencies();
 
             builder.Services.AddAutoMapper(typeof(Program));
