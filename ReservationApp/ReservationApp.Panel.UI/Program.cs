@@ -12,6 +12,7 @@ using ReservationApp.DataAccessLayer.Abstract;
 using ReservationApp.DataAccessLayer.Concrete;
 using ReservationApp.DataAccessLayer.Entity_Framework;
 using ReservationApp.EntityLayer.Concrete;
+using ReservationApp.Panel.UI.CQRS.Handlers.DestinationHandlers;
 using ReservationApp.Panel.UI.Models;
 
 namespace ReservationApp.Panel.UI
@@ -29,6 +30,12 @@ namespace ReservationApp.Panel.UI
             builder.Logging.AddFile($"{path}\\Logs\\Log1.txt");
 
             // Add services to the container.
+            builder.Services.AddScoped<GetAllDestinationQueryHandler>();
+            builder.Services.AddScoped<GetDestinationByIDQueryHandler>();
+            builder.Services.AddScoped<CreateDestinationCommandHandler>();
+            builder.Services.AddScoped<RemoveDestinationCommandHandler>();
+            builder.Services.AddScoped<UpdateDestinationCommandHandler>();
+
             builder.Services.AddDbContext<Context>();
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>();
 
